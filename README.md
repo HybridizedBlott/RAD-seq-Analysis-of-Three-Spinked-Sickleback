@@ -1,14 +1,14 @@
 **Investigating the genomic variation of Gasterosteus aculeatus across different population groups - February 8, 2025**
 
-The purpose of this analysis was to elucidate whether distinct genomic SNP variations exist for Gasterosteus aculeatus derived from different deglaciated fresh water regions in Orgeon, USA.
+The purpose of this analysis was to elucidate whether distinct genomic SNP variations exist for Gasterosteus aculeatus derived from different deglaciated Oceanic and fresh water regions in Orgeon, USA.
 
 Although the original dataset contained 578 samples across 9 different sampling sites, this analysis only considered 24 samples across 4 different sampling sites (Catchen et al., 2013).
 
 Sites included:
-- pcr: Pony Creek Reservoir
-- cs: Cushman Slough
-- sj: South Jetty
-- wc: Winchester Creek
+- pcr: Pony Creek Reservoir (Freshwater)
+- cs: Cushman Slough (Oceanic)
+- sj: South Jetty (Oceanic)
+- wc: Winchester Creek (Freshwater)
 
 The protocal used for this analysis was primarily derived from the protocol developed by Rochette and Catchen (2017). 
 
