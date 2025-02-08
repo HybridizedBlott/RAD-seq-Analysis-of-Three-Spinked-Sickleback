@@ -1,0 +1,49 @@
+#Thomas Tekle
+#Binf Genomics Assignment 1
+#Conducting sequence alignments and population-relevant variant calling on population of Three-spined sickleback fish
+#Conducted on the Digital Alliance Cedar cluster under Dr. Lewis Lukens' group 
+
+#Retrieving most recent version of fish genome
+wget https://ftp.ensembl.org/pub/release-113/fasta/gasterosteus_aculeatus/dna/Gasterosteus_aculeatus.GAculeatus_UGA_version5.dna.toplevel.fa.gz 
+
+#Unzipping raw FastQ sample files 
+gunzip *.fq.gz
+
+#Initializing BWA alignment tools
+module load bwa/0.7.18
+
+#Indexing Genome 
+bwa index Gasterosteus_aculeatus.GAculeatus_UGA_version5.dna.toplevel.fa.gz
+
+#Iteratively conducting alignment of all samples on reference genome and renaming each file with .sam suffix using for loop 
+for file in *.fq;do name=$(echo "$file" | sed 's/\.fq/\.sam/'); bwa mem ../Gasterosteus_aculeatus.GAculeatus_UGA_version5.dna.toplevel.fa "$file" > "$name"
+
+#Initializing samtools 
+module load samtools/1.20
+
+#Converting sam files to bam and sorting entries using samtools
+for i in *.sam; do samtools view -b "$i" > "${name}.bam"; samtools sort "${name}.bam" -o "${name}.sorted.bam"; done
+
+#Initializing stacks tool suite
+module load StdEnv/2023
+module load stacks 
+
+#Creating population map for use in gstacks tool
+ls | sed 's/\.sorted/\.bam/' | awk -F '_' '{print $0 "\t" $1}  > popmap.tsv 
+
+#Running gstacks variant calling on all sorted bam files using the created population map
+gstacks -I ./ -M popmap.tsv -O ../gstacks_output/
+
+#Converting gstacks ouput files into vcf file for subsequent PCA 
+populations -P ../gstacks_output/ -M popmap.tsv --vcf -r 0.8 -p 2 --min-maf 0.05 -O ../populations_output/ 
+
+#Producing principle components from vcf file using Vcftools and plink
+vcftools --vcf ../populations_output/populations.snps.vcf --plink --out pca_data
+plink --file pca_data --make-bed --out pca_plink 
+plink --bfile pca_plink --pca 10 --out pca_results
+
+#From this pipeline a pca_results.eigenvec file was produced which was used for the remainder of the analysis
+
+#References:
+
+#Rochette, N. C., & Catchen, J. M. (2017). Deriving genotypes from RAD-seq short-read data using Stacks. Nature Protocols, 12(12), 2640–2659. https://doi.org/10.1038/nprot.2017.123
