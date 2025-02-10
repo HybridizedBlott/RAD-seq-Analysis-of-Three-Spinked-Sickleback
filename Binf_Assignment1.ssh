@@ -42,7 +42,7 @@ vcftools --vcf ../populations_output/populations.snps.vcf --plink --out pca_data
 plink --file pca_data --make-bed --out pca_plink 
 plink --bfile pca_plink --pca 10 --out pca_results
 
-#From this pipeline a pca_results.eigenvec file was produced which was used for the remainder of the analysis
+#From this pipeline a pca_results.eigenvec file was produced which was used for the remainder of the analysis in R
 
 #References:
 
