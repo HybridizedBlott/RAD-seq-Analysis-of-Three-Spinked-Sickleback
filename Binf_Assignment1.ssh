@@ -35,7 +35,7 @@ ls | sed 's/\.sorted/\.bam/' | awk -F '_' '{print $0 "\t" $1}  > popmap.tsv
 gstacks -I ./ -M popmap.tsv -O ../gstacks_output/
 
 #Converting gstacks ouput files into vcf file for subsequent PCA 
-populations -P ../gstacks_output/ -M popmap.tsv --vcf -r 0.8 -p 2 --min-maf 0.05 -O ../populations_output/ 
+populations -P ../gstacks_output/ -M popmap.tsv --vcf -r 0.80 -p 2 --min-maf 0.05 --max-obs-het 0.70 -O ../populations_output/ 
 
 #Producing principle components from vcf file using Vcftools and plink
 vcftools --vcf ../populations_output/populations.snps.vcf --plink --out pca_data
