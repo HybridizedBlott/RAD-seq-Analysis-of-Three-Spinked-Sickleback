@@ -12,7 +12,7 @@ Sites included:
 
 The protocal used for this analysis was primarily derived from the protocol developed by Rochette and Catchen (2017). 
 
-For this Assignment a PCA and Fst analysis was conducted to determine the affect of adjusting the r paramter in the populations command derived from the stacks module, to determine its impact on the results.
+For this Assignment a PCA and Fst analysis was conducted to determine the impact of adjusting the r paramter in the populations command derived from the stacks module on the final results and possible conclusions that could be made about the populations under investigation.
 
 References:
 1. Catchen, J., Bassham, S., Wilson, T., Currey, M., O’Brien, C., Yeates, Q., & Cresko, W. A. (2013). The population structure and recent colonization history ofOregon threespine stickleback determined using restriction‐site associatedDNA‐sequencing. Molecular Ecology, 22(11), 2864–2883. https://doi.org/10.1111/mec.12330
